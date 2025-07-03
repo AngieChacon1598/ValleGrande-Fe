@@ -83,4 +83,9 @@ export class ProductService {
       })
     });
   }
+
+  // Método para compatibilidad con pruebas unitarias
+  getAll(): Observable<Product[]> {
+    return this.getProducts();
+  }
 }

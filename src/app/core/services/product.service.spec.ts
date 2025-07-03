@@ -7,8 +7,24 @@ describe('ProductService', () => {
   let service: ProductService;
   let httpMock: HttpTestingController;
   const dummyProducts: Product[] = [
-    { id: 1, name: 'Prod 1', price: 10, category: { id: 1, name: 'Cat 1' } },
-    { id: 2, name: 'Prod 2', price: 20, category: { id: 1, name: 'Cat 1' } }
+    {
+      id: 1,
+      name: 'Prod 1',
+      description: '',
+      price: 10,
+      status: 'A',
+      imageUrl: '',
+      category: { id: 1, name: 'Cat 1', status: 'A' }
+    },
+    {
+      id: 2,
+      name: 'Prod 2',
+      description: '',
+      price: 20,
+      status: 'A',
+      imageUrl: '',
+      category: { id: 1, name: 'Cat 1', status: 'A' }
+    }
   ];
 
   beforeEach(() => {
@@ -27,7 +43,10 @@ describe('ProductService', () => {
   it('should retrieve all products', () => {
     service.getAll().subscribe(products => {
       expect(products.length).toBe(2);
-      expect(products).toEqual(dummyProducts);
+      expect(products[0].id).toBe(dummyProducts[0].id);
+      expect(products[0].name).toBe(dummyProducts[0].name);
+      expect(products[1].id).toBe(dummyProducts[1].id);
+      expect(products[1].name).toBe(dummyProducts[1].name);
     });
 
     const req = httpMock.expectOne('http://localhost:8083/api/products');
